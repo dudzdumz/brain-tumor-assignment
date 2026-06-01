@@ -1,0 +1,176 @@
+(venv) PS C:\Users\Admin\OneDrive\Desktop\College 4\AI and DL\assignment\brain_tumor_assignment> py train_brain_tumor.py
+Matplotlib is building the font cache; this may take a moment.
+WARNING: All log messages before absl::InitializeLog() is called are written to STDERR
+I0000 00:00:1780330495.063655   90980 port.cc:153] oneDNN custom operations are on. You may see slightly different numerical results due to floating-point round-off errors from different computation orders. To turn them off, set the environment variable `TF_ENABLE_ONEDNN_OPTS=0`.
+WARNING: All log messages before absl::InitializeLog() is called are written to STDERR
+I0000 00:00:1780330500.977300   90980 port.cc:153] oneDNN custom operations are on. You may see slightly different numerical results due to floating-point round-off errors from different computation orders. To turn them off, set the environment variable `TF_ENABLE_ONEDNN_OPTS=0`.
+Dataset loaded successfully.
+Total images: 253
+Image shape: (128, 128, 3)
+Class labels: 0 = No Tumor, 1 = Tumor
+No Tumor images: 98
+Tumor images: 155
+
+Data split completed.
+Training samples: 177
+Validation samples: 38
+Testing samples: 38
+C:\Users\Admin\OneDrive\Desktop\College 4\AI and DL\assignment\brain_tumor_assignment\venv\Lib\site-packages\keras\src\layers\convolutional\base_conv.py:113: UserWarning: Do not pass an `input_shape`/`input_dim` argument to a layer. When using Sequential models, prefer using an `Input(shape)` object as the first layer in the model instead.
+  super().__init__(activity_regularizer=activity_regularizer, **kwargs)
+I0000 00:00:1780330504.204158   90980 cpu_feature_guard.cc:227] This TensorFlow binary is optimized to use available CPU instructions in performance-critical operations.
+To enable the following instructions: SSE3 SSE4.1 SSE4.2 AVX AVX2 AVX512F AVX512_VNNI FMA, in other operations, rebuild TensorFlow with the appropriate compiler flags.
+WARNING:tensorflow:TensorFlow GPU support is not available on native Windows for TensorFlow >= 2.11. Even if CUDA/cuDNN are installed, GPU will not be used. Please use WSL2 or the TensorFlow-DirectML plugin.
+Model: "sequential"
+┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━┓
+┃ Layer (type)                         ┃ Output Shape                ┃         Param # ┃
+┡━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━┩
+│ conv2d (Conv2D)                      │ (None, 126, 126, 32)        │             896 │
+├──────────────────────────────────────┼─────────────────────────────┼─────────────────┤
+│ max_pooling2d (MaxPooling2D)         │ (None, 63, 63, 32)          │               0 │
+├──────────────────────────────────────┼─────────────────────────────┼─────────────────┤
+│ dropout (Dropout)                    │ (None, 63, 63, 32)          │               0 │
+├──────────────────────────────────────┼─────────────────────────────┼─────────────────┤
+│ conv2d_1 (Conv2D)                    │ (None, 61, 61, 64)          │          18,496 │
+├──────────────────────────────────────┼─────────────────────────────┼─────────────────┤
+│ max_pooling2d_1 (MaxPooling2D)       │ (None, 30, 30, 64)          │               0 │
+├──────────────────────────────────────┼─────────────────────────────┼─────────────────┤
+│ dropout_1 (Dropout)                  │ (None, 30, 30, 64)          │               0 │
+├──────────────────────────────────────┼─────────────────────────────┼─────────────────┤
+│ conv2d_2 (Conv2D)                    │ (None, 28, 28, 128)         │          73,856 │
+├──────────────────────────────────────┼─────────────────────────────┼─────────────────┤
+│ max_pooling2d_2 (MaxPooling2D)       │ (None, 14, 14, 128)         │               0 │
+├──────────────────────────────────────┼─────────────────────────────┼─────────────────┤
+│ dropout_2 (Dropout)                  │ (None, 14, 14, 128)         │               0 │
+├──────────────────────────────────────┼─────────────────────────────┼─────────────────┤
+│ flatten (Flatten)                    │ (None, 25088)               │               0 │
+├──────────────────────────────────────┼─────────────────────────────┼─────────────────┤
+│ dense (Dense)                        │ (None, 128)                 │       3,211,392 │
+├──────────────────────────────────────┼─────────────────────────────┼─────────────────┤
+│ dropout_3 (Dropout)                  │ (None, 128)                 │               0 │
+├──────────────────────────────────────┼─────────────────────────────┼─────────────────┤
+│ dense_1 (Dense)                      │ (None, 1)                   │             129 │
+└──────────────────────────────────────┴─────────────────────────────┴─────────────────┘
+ Total params: 3,304,769 (12.61 MB)
+ Trainable params: 3,304,769 (12.61 MB)
+ Non-trainable params: 0 (0.00 B)
+
+Training Custom CNN...
+Epoch 1/10
+12/12 ━━━━━━━━━━━━━━━━━━━━ 2s 107ms/step - accuracy: 0.6215 - loss: 0.6297 - val_accuracy: 0.6579 - val_loss: 0.6064
+Epoch 2/10
+12/12 ━━━━━━━━━━━━━━━━━━━━ 1s 90ms/step - accuracy: 0.6554 - loss: 0.6183 - val_accuracy: 0.7368 - val_loss: 0.5724
+Epoch 3/10
+12/12 ━━━━━━━━━━━━━━━━━━━━ 1s 91ms/step - accuracy: 0.6780 - loss: 0.6117 - val_accuracy: 0.7368 - val_loss: 0.5573
+Epoch 4/10
+12/12 ━━━━━━━━━━━━━━━━━━━━ 1s 89ms/step - accuracy: 0.6554 - loss: 0.6307 - val_accuracy: 0.8158 - val_loss: 0.5548
+Epoch 5/10
+12/12 ━━━━━━━━━━━━━━━━━━━━ 1s 97ms/step - accuracy: 0.6554 - loss: 0.6133 - val_accuracy: 0.7368 - val_loss: 0.5603
+Epoch 6/10
+12/12 ━━━━━━━━━━━━━━━━━━━━ 1s 89ms/step - accuracy: 0.6780 - loss: 0.6011 - val_accuracy: 0.7895 - val_loss: 0.5544
+Epoch 7/10
+12/12 ━━━━━━━━━━━━━━━━━━━━ 1s 89ms/step - accuracy: 0.6384 - loss: 0.6254 - val_accuracy: 0.7368 - val_loss: 0.5504
+Epoch 8/10
+12/12 ━━━━━━━━━━━━━━━━━━━━ 1s 88ms/step - accuracy: 0.7119 - loss: 0.5465 - val_accuracy: 0.7895 - val_loss: 0.5432
+Epoch 9/10
+12/12 ━━━━━━━━━━━━━━━━━━━━ 1s 91ms/step - accuracy: 0.6723 - loss: 0.6273 - val_accuracy: 0.7895 - val_loss: 0.5567
+Epoch 10/10
+12/12 ━━━━━━━━━━━━━━━━━━━━ 1s 89ms/step - accuracy: 0.6949 - loss: 0.6028 - val_accuracy: 0.7895 - val_loss: 0.5840
+Downloading data from https://storage.googleapis.com/tensorflow/keras-applications/mobilenet_v2/mobilenet_v2_weights_tf_dim_ordering_tf_kernels_1.0_128_no_top.h5
+9406464/9406464 ━━━━━━━━━━━━━━━━━━━━ 0s 0us/step
+Model: "sequential_1"
+┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━┓
+┃ Layer (type)                         ┃ Output Shape                ┃         Param # ┃
+┡━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━┩
+│ mobilenetv2_1.00_128 (Functional)    │ (None, 4, 4, 1280)          │       2,257,984 │
+├──────────────────────────────────────┼─────────────────────────────┼─────────────────┤
+│ global_average_pooling2d             │ (None, 1280)                │               0 │
+│ (GlobalAveragePooling2D)             │                             │                 │
+├──────────────────────────────────────┼─────────────────────────────┼─────────────────┤
+│ dense_2 (Dense)                      │ (None, 128)                 │         163,968 │
+├──────────────────────────────────────┼─────────────────────────────┼─────────────────┤
+│ dropout_4 (Dropout)                  │ (None, 128)                 │               0 │
+├──────────────────────────────────────┼─────────────────────────────┼─────────────────┤
+│ dense_3 (Dense)                      │ (None, 1)                   │             129 │
+└──────────────────────────────────────┴─────────────────────────────┴─────────────────┘
+ Total params: 2,422,081 (9.24 MB)
+ Trainable params: 164,097 (641.00 KB)
+ Non-trainable params: 2,257,984 (8.61 MB)
+
+Training MobileNetV2 Transfer Learning Model...
+Epoch 1/10
+12/12 ━━━━━━━━━━━━━━━━━━━━ 5s 173ms/step - accuracy: 0.4746 - loss: 0.8110 - val_accuracy: 0.6579 - val_loss: 0.6326
+Epoch 2/10
+12/12 ━━━━━━━━━━━━━━━━━━━━ 1s 72ms/step - accuracy: 0.6271 - loss: 0.6595 - val_accuracy: 0.6842 - val_loss: 0.5583
+Epoch 3/10
+12/12 ━━━━━━━━━━━━━━━━━━━━ 1s 81ms/step - accuracy: 0.6328 - loss: 0.6111 - val_accuracy: 0.7895 - val_loss: 0.5154
+Epoch 4/10
+12/12 ━━━━━━━━━━━━━━━━━━━━ 1s 78ms/step - accuracy: 0.7232 - loss: 0.5373 - val_accuracy: 0.7632 - val_loss: 0.4784
+Epoch 5/10
+12/12 ━━━━━━━━━━━━━━━━━━━━ 1s 79ms/step - accuracy: 0.7232 - loss: 0.5462 - val_accuracy: 0.7632 - val_loss: 0.4449
+Epoch 6/10
+12/12 ━━━━━━━━━━━━━━━━━━━━ 1s 77ms/step - accuracy: 0.7797 - loss: 0.4456 - val_accuracy: 0.8158 - val_loss: 0.4195
+Epoch 7/10
+12/12 ━━━━━━━━━━━━━━━━━━━━ 1s 76ms/step - accuracy: 0.7627 - loss: 0.4435 - val_accuracy: 0.8158 - val_loss: 0.4049
+Epoch 8/10
+12/12 ━━━━━━━━━━━━━━━━━━━━ 1s 78ms/step - accuracy: 0.8249 - loss: 0.4095 - val_accuracy: 0.8684 - val_loss: 0.3940
+Epoch 9/10
+12/12 ━━━━━━━━━━━━━━━━━━━━ 1s 76ms/step - accuracy: 0.8192 - loss: 0.4312 - val_accuracy: 0.8158 - val_loss: 0.3784
+Epoch 10/10
+12/12 ━━━━━━━━━━━━━━━━━━━━ 1s 79ms/step - accuracy: 0.7797 - loss: 0.4247 - val_accuracy: 0.8684 - val_loss: 0.3737
+2/2 ━━━━━━━━━━━━━━━━━━━━ 0s 72ms/step
+
+==================================================
+RESULTS: Custom CNN
+==================================================
+Accuracy : 68.42%
+Precision: 67.74%
+Recall   : 91.30%
+F1 Score : 77.78%
+
+Classification Report:
+              precision    recall  f1-score   support
+
+    No Tumor       0.71      0.33      0.45        15
+       Tumor       0.68      0.91      0.78        23
+
+    accuracy                           0.68        38
+   macro avg       0.70      0.62      0.62        38
+weighted avg       0.69      0.68      0.65        38
+
+Confusion Matrix:
+[[ 5 10]
+ [ 2 21]]
+2/2 ━━━━━━━━━━━━━━━━━━━━ 2s 827ms/step
+
+==================================================
+RESULTS: MobileNetV2 Transfer Learning
+==================================================
+Accuracy : 86.84%
+Precision: 87.50%
+Recall   : 91.30%
+F1 Score : 89.36%
+
+Classification Report:
+              precision    recall  f1-score   support
+
+    No Tumor       0.86      0.80      0.83        15
+       Tumor       0.88      0.91      0.89        23
+
+    accuracy                           0.87        38
+   macro avg       0.87      0.86      0.86        38
+weighted avg       0.87      0.87      0.87        38
+
+Confusion Matrix:
+[[12  3]
+ [ 2 21]]
+
+======================================================================
+FINAL MODEL COMPARISON
+======================================================================
+Metric         Custom CNN          MobileNetV2         
+----------------------------------------------------------------------
+Accuracy       68.42               86.84               
+Precision      67.74               87.50               
+Recall         91.30               91.30               
+F1 Score       77.78               89.36               
+(venv) PS C:\Users\Admin\OneDrive\Desktop\College 4\AI and DL\assignment\brain_tumor_assignment> 
